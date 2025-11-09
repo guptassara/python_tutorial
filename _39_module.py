@@ -29,10 +29,10 @@ print(e**d)
 print(e**e)
 
 
-import module_example
+import _39_module_example
 
-result = module_example.pi
-result = module_example.square(2)
-result = module_example.cube(5)
-result = module_example.circumference(25)
-result = module_example.area(45)
+result = _39_module_example.pi
+result = _39_module_example.square(2)
+result = _39_module_example.cube(5)
+result = _39_module_example.circumference(25)
+result = _39_module_example.area(45)

@@ -1,6 +1,6 @@
 import random
 
-from hangman_word_list import words
+from _45_2_hangman_word_list import words
 
 # dictionary of key:()
 
