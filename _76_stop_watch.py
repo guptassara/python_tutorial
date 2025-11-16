@@ -31,7 +31,7 @@ class StopWatch(QWidget):
 
         self.setLayout(vbox)
 
-        self.time_label.setAlignment(Qt.AlignCenter)
+        self.time_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         hbox = QHBoxLayout()
 
@@ -53,7 +53,8 @@ class StopWatch(QWidget):
         my_font = QFont(font_family, 150)
         self.time_label.setFont(my_font)
 
-        self.setStyleSheet("""
+        self.setStyleSheet(
+            """
             QWidget {
                 background-color: #F8E9FF;
             }
@@ -92,7 +93,8 @@ class StopWatch(QWidget):
             QPushButton#stop_button:hover {
                 background-color: #C18CFF;
             }
-        """)
+        """
+        )
 
         self.start_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)

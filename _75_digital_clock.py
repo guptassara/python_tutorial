@@ -20,7 +20,7 @@ class DigitalClock(QWidget):
         vbox.addWidget(self.time_label)
         self.setLayout(vbox)
 
-        self.time_label.setAlignment(Qt.AlignCenter)
+        self.time_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.time_label.setStyleSheet("font-size: 150px;color: #7A1FCC;")
 
