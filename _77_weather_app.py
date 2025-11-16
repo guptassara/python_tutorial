@@ -93,6 +93,7 @@ class WeatherApp(QWidget):
                 background-color: #E95FA9;
             }
             QLabel#emoji_label{
+                font-family: Segoe UI Emoji;
                 font-size: 100px;
             }
             QLabel#description_label {
@@ -108,6 +109,7 @@ class WeatherApp(QWidget):
         url = (
             f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
         )
+        response = None
         try:
             response = requests.get(url)
             response.raise_for_status()
@@ -117,25 +119,32 @@ class WeatherApp(QWidget):
                 self.display_weather(data)
 
         except requests.exceptions.HTTPError as http_error:
-            match response.status_code:
-                case 400:
-                    self.display_error("Bad request:\nPlease check your input")
-                case 401:
-                    self.display_error("Unauthorized:\nInvalid API key")
-                case 403:
-                    self.display_error("Forbidden:\nAccess Denied")
-                case 404:
-                    self.display_error("Not found:\ncity not Found")
-                case 500:
-                    self.display_error("Internal server error:\nPlease try again later")
-                case 502:
-                    self.display_error("Bad gateway:\nInvalid response from the server")
-                case 503:
-                    self.display_error("Service unavailable:\nServer is down")
-                case 504:
-                    self.display_error("Gateway Timeout:\nNo response from the server")
-                case _:
-                    self.display_error(f"HTTP error occured:\n{http_error}")
+            if response is not None:
+                match response.status_code:
+                    case 400:
+                        self.display_error("Bad request:\nPlease check your input")
+                    case 401:
+                        self.display_error("Unauthorized:\nInvalid API key")
+                    case 403:
+                        self.display_error("Forbidden:\nAccess Denied")
+                    case 404:
+                        self.display_error("Not found:\ncity not Found")
+                    case 500:
+                        self.display_error(
+                            "Internal server error:\nPlease try again later"
+                        )
+                    case 502:
+                        self.display_error(
+                            "Bad gateway:\nInvalid response from the server"
+                        )
+                    case 503:
+                        self.display_error("Service unavailable:\nServer is down")
+                    case 504:
+                        self.display_error(
+                            "Gateway Timeout:\nNo response from the server"
+                        )
+                    case _:
+                        self.display_error(f"HTTP error occured:\n{http_error}")
 
         except requests.exceptions.Timeout:
             self.display_error("Connection error:\nthe request timed out")
